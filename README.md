@@ -1,7 +1,7 @@
 # EbayTest 
-Automation test for eBay problem statement
-Solution generated with Java, Cucumber, Selenium 
-Report artifacts with screenshot, cucumber html plugin
+Automation project to order gift card based on various filters on ebay.
+
+Frameworks used: Java, Cucumber, Selenium and report artifacts with screenshot, html summary
 
 ## Initialization
 Run it with maven test
