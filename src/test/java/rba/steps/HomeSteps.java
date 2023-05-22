@@ -1,6 +1,7 @@
 package rba.steps;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +16,11 @@ public class HomeSteps {
     private HomePage homePage = new HomePage();
 
 
+    @After
+    public void cleanUp() {
+        System.out.println(this.getClass().getName() + " cleanUp");
+        homePage.cleanUp();
+    }
     @Given("A user is on home page")
     public void navigateToHome() throws IOException {
         homePage.navigateHomePage();
@@ -37,7 +43,7 @@ public class HomeSteps {
         homePage.navigateToSearchOption(option);
     }
 
-    @Then("User is navigated to following page")
+    @And("User is navigated to following page")
     public void verifyNavigatedPage(DataTable datatable) {
         String pageHeader = datatable.cell(1, 0);
         Assert.assertTrue(homePage.verifyPage(pageHeader));

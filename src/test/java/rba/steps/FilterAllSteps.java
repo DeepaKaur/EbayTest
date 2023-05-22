@@ -1,6 +1,7 @@
 package rba.steps;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,6 +12,12 @@ import rba.model.components.forms.AllFilterForm;
 public class FilterAllSteps {
 
     private AllFilterForm allfilterform = new AllFilterForm();
+
+    @After
+    public void cleanUp() {
+        System.out.println(this.getClass().getName() + " cleanUp");
+        allfilterform.cleanUp();
+    }
 
     @Given("user is on all filter form on gift and vouchers")
     public void onAllFilterGiftAndVoucher() {
@@ -42,7 +49,7 @@ public class FilterAllSteps {
         allfilterform.selectGlobalOptions(showOnly);
     }
 
-    @Then("Filter form is displayed")
+    @And("Filter form is displayed")
     public void displayFilterform() {
         Assert.assertTrue(allfilterform.isFormDisplayed());
 

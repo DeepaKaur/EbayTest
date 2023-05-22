@@ -11,43 +11,48 @@ import java.io.IOException;
 
 public class HomePage {
 
-    protected WebDriver driver;
 
     public HomePage() {
-        this.driver = Util.getWebDriver();
+
     }
 
+
+
+    public void cleanUp() {
+        System.out.println(this.getClass().getName() + " cleanUp");
+        Util.closeWebDriver();
+    }
     public void navigateHomePage()  {
-        driver.get("https://ebay.com.au");
-        Screenshots.takeScreenshot(driver,"Homepage");
+        Util.getWebDriver().get("https://ebay.com.au");
+        Screenshots.takeScreenshot(Util.getWebDriver(),"Homepage");
 
     }
 
     public boolean verifyPage(String pageHeader){
-        return driver.findElement(By.xpath("//h1[contains(text(),'" + pageHeader + "')]")).isDisplayed();
+        return Util.getWebDriver().findElement(By.xpath("//h1[contains(text(),'" + pageHeader + "')]")).isDisplayed();
     }
 
 
     public void navigateToTab(String searchTab){
-        WebElement tab = driver.findElement(By.partialLinkText(searchTab));
-        Actions actions = new Actions(driver);
+        WebElement tab = Util.getWebDriver().findElement(By.partialLinkText(searchTab));
+        Actions actions = new Actions(Util.getWebDriver());
         actions.moveToElement(tab).perform();
-        Screenshots.takeScreenshot(driver,"Navigatetotab");
+        Screenshots.takeScreenshot(Util.getWebDriver(),"Navigatetotab");
     }
 
     public void navigateToSearchOption(String option){
-        driver.findElement(By.xpath("//a[contains(text(),'" + option + "')]")).click();
+        Util.getWebDriver().findElement(By.xpath("//a[contains(text(),'" + option + "')]")).click();
     }
 
     public boolean verifyFilteredPage() {
-       return driver.findElement(By.xpath("//span[contains(text(),'Gift Cards & Vouchers between')]")).isDisplayed();
+       return Util.getWebDriver().findElement(By.xpath("//span[contains(text(),'Gift Cards & Vouchers between')]")).isDisplayed();
     }
 
     public void closeBrowser() {
-        driver.close();
+        Util.getWebDriver().close();
     }
 
     public boolean verifyNotNullResults() {
-        return driver.findElement(By.xpath("//section[contains(@class,'b-lownull')]")).isDisplayed();
+        return Util.getWebDriver().findElement(By.xpath("//section[contains(@class,'b-lownull')]")).isDisplayed();
     }
 }

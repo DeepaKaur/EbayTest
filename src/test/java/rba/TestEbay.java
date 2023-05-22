@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features/ebaytest.feature",
+        features = "classpath:features",
+        tags = "@eBayTest",
         glue = {"rba.steps"},
         plugin = { "pretty", "html:target/html-reports.html" },
         monochrome = true,
